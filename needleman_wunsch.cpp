@@ -63,16 +63,7 @@ void initialise_similarity_matrix()
 	{
 		similarity[i][0] = 0;
 		similarity[0][i] = 0;
-	}
-
-	/*for(i=0;i<=27;i++)
-	{
-		for(j=0;j<=27;j++)
-		{
-			cout << similarity[i][j] << " ";
-		}
-		cout << "\n";
-	}*/		
+	}	
 }
 
 double JointSeqSimilarity(string str1,string str2)
@@ -117,23 +108,9 @@ double JointSeqSimilarity(string str1,string str2)
 			int id2 = cubeSeq2[j-1];
 			double temp = max(costMatrix[i-1][j], costMatrix[i][j-1]) + calcPenalty(i,j,len1,len2,penalty-3);
 			double temp2 = max( temp , costMatrix[i-1][j-1]+similarity[id1][id2]);
-			/*if(temp2 == temp)
-			  cout << "win\n";
-			else
-			  cout << "lose\n";*/
 			costMatrix[i][j] = temp2;
-			//costMatrix[i][j] = costMatrix[i][j] * (len1/2-i) * (len2/2-j);
 		}
 	}
-	/*
-	for(i=0;i<=len1;i++)
-	{
-		for(j=0;j<=len2;j++)
-		{
-			cout << costMatrix[i][j] << " ";
-		}
-		cout << "\n";
-	}*/
 	return costMatrix[len1][len2];  
 }
 
@@ -150,8 +127,6 @@ double calcPenalty(int i, int j, int len1, int len2, int normPenality)
 double GestureSeqSimilarity(vector<string> gesture1, vector<string> gesture2)
 {
 	int i;
-	//int dist[20];
-	//double similarity[20];
 	double sumDist = 0;
 	double GestureDist = 0;
 	for(i=0;i<20;i++)
@@ -163,15 +138,14 @@ double GestureSeqSimilarity(vector<string> gesture1, vector<string> gesture2)
 	return GestureDist/sumDist*100;
 }
 
-// int main()
-// {
-// 	initialise_similarity_matrix();
-// 	//Dynamic Programming
-// 	string str1, str2;
-// 	cout << "Enter first string \n";
-// 	cin >> str1;
-// 	cout << "Enter second string \n";
-// 	cin >> str2;
-// 	
-// 	cout << return_similarity(str1,str2);	
-// }
+int main()
+{
+	initialise_similarity_matrix();
+	string str1, str2;
+	cout << "Enter first string \n";
+	cin >> str1;
+	cout << "Enter second string \n";
+	cin >> str2;
+	
+	cout << return_similarity(str1,str2);	
+}
